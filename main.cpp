@@ -1,6 +1,7 @@
 #include <iostream>
 
-#include "heap.h"
+#include "heap.hpp"
+#include "util.hpp"
 using namespace std;
 
 int main()
