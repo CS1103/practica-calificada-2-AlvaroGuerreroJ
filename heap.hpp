@@ -10,6 +10,9 @@
 template<class T, template<class... TArgs> class ContainerTemplate = std::vector>
 class heap
 {
+public:
+    using value_type = T;
+
 private:
     using Cnt = ContainerTemplate<T>;
 
@@ -56,10 +59,7 @@ template<class T, template<class... TArgs> class ContainerTemplate>
 void heap<T, ContainerTemplate>::insert(T item)
 {
     m_container.push_back(item);
-    if (m_container.size() != 1)
-    {
-        max_heapify(m_container.size() - 1);
-    }
+    max_heapify(m_container.size() - 1);
 }
 
 template<class T, template<class... TArgs> class ContainerTemplate>
