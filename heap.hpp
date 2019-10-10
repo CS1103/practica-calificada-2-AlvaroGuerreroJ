@@ -7,7 +7,7 @@
 #include <ostream>
 #include <vector>
 
-template<class T, template<class... TArgs> class ContainerTemplate = std::vector>
+template<class T, template<class...> class ContainerTemplate = std::vector>
 class heap
 {
 public:
@@ -29,9 +29,9 @@ public:
     template<class... TS>
     void insert(T item, TS... rest);
 
-    template<class TF, template<class... TFArgs> class ContainerTemplateF>
+    template<class TF, template<class...> class ContainerTemplateF>
     friend std::istream& operator>>(std::istream& in, heap<TF, ContainerTemplateF>& hp);
-    template<class TF, template<class... TFArgs> class ContainerTemplateF>
+    template<class TF, template<class...> class ContainerTemplateF>
     friend std::ostream& operator<<(std::ostream& out, heap<TF, ContainerTemplateF> const& hp);
 
 private:
@@ -43,26 +43,26 @@ private:
     }
 };
 
-template<class T, template<class... TArgs> class ContainerTemplate>
+template<class T, template<class...> class ContainerTemplate>
 heap<T, ContainerTemplate>::heap(heap<T, ContainerTemplate> const& other)
     : m_container(other.m_container)
 {
 }
 
-template<class T, template<class... TArgs> class ContainerTemplate>
+template<class T, template<class...> class ContainerTemplate>
 T heap<T, ContainerTemplate>::get_max()
 {
     return m_container.front();
 }
 
-template<class T, template<class... TArgs> class ContainerTemplate>
+template<class T, template<class...> class ContainerTemplate>
 void heap<T, ContainerTemplate>::insert(T item)
 {
     m_container.push_back(item);
     max_heapify(m_container.size() - 1);
 }
 
-template<class T, template<class... TArgs> class ContainerTemplate>
+template<class T, template<class...> class ContainerTemplate>
 template<class... TS>
 void heap<T, ContainerTemplate>::insert(T item, TS... rest)
 {
@@ -70,7 +70,7 @@ void heap<T, ContainerTemplate>::insert(T item, TS... rest)
     insert(rest...);
 }
 
-template<class T, template<class... TArgs> class ContainerTemplate>
+template<class T, template<class...> class ContainerTemplate>
 void heap<T, ContainerTemplate>::max_heapify(typename Cnt::iterator::difference_type child_pos)
 {
     if (child_pos == 0)
@@ -87,7 +87,7 @@ void heap<T, ContainerTemplate>::max_heapify(typename Cnt::iterator::difference_
     }
 }
 
-template<class TF, template<class... TFArgs> class ContainerTemplateF>
+template<class TF, template<class...> class ContainerTemplateF>
 std::istream& operator>>(std::istream& in, heap<TF, ContainerTemplateF>& hp)
 {
     TF temp;
@@ -97,7 +97,7 @@ std::istream& operator>>(std::istream& in, heap<TF, ContainerTemplateF>& hp)
     return in;
 }
 
-template<class TF, template<class... TFArgs> class ContainerTemplateF>
+template<class TF, template<class...> class ContainerTemplateF>
 std::ostream& operator<<(std::ostream& out, heap<TF, ContainerTemplateF> const& hp)
 {
     for (auto const& e : hp.m_container)

@@ -9,13 +9,13 @@
 
 #include "heap.hpp"
 
-template<class T, template <class... TP> class ConTem, class... Args>
+template<class T, template <class...> class ConTem, class... Args>
 void insert(heap<T, ConTem>& hp, T first, Args... items)
 {
     hp.insert(first);
 }
 
-template<class T, template<class... TP> class ConTem>
+template<class T, template<class...> class ConTem>
 void load_from(std::string const& file_name, heap<T, ConTem>& hp)
 {
     std::ifstream in(file_name);
