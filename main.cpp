@@ -1,4 +1,5 @@
 #include <iostream>
+#include <deque>
 
 #include "heap.hpp"
 #include "util.hpp"

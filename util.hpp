@@ -18,8 +18,6 @@ void insert(heap<T>& hp, T first, Args... items)
 template<class T>
 void load_from(std::string const& file_name, heap<T>& hp)
 {
-    T temp;
-
     std::ifstream in(file_name);
 
     if (!in)
@@ -27,12 +25,11 @@ void load_from(std::string const& file_name, heap<T>& hp)
         throw std::runtime_error("The file " + file_name + " doesn't exist");
     }
 
+    T temp;
     while (in >> temp)
     {
         hp.insert(temp);
     }
-
-    in.close();
 }
 
 #endif
