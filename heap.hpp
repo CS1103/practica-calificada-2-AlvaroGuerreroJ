@@ -26,10 +26,10 @@ public:
     template<class... TS>
     void insert(T item, TS... rest);
 
-    template<class TF>
-    friend std::istream& operator>>(std::istream& in, heap<TF>& hp);
-    template<class TF>
-    friend std::ostream& operator<<(std::ostream& out, heap<TF> const& hp);
+    template<class TF, template<class... TFArgs> class ContainerTemplateF>
+    friend std::istream& operator>>(std::istream& in, heap<TF, ContainerTemplateF>& hp);
+    template<class TF, template<class... TFArgs> class ContainerTemplateF>
+    friend std::ostream& operator<<(std::ostream& out, heap<TF, ContainerTemplateF> const& hp);
 
 private:
     void max_heapify(typename Cnt::iterator::difference_type child_pos);
@@ -87,8 +87,8 @@ void heap<T, ContainerTemplate>::max_heapify(typename Cnt::iterator::difference_
     }
 }
 
-template<class TF>
-std::istream& operator>>(std::istream& in, heap<TF>& hp)
+template<class TF, template<class... TFArgs> class ContainerTemplateF>
+std::istream& operator>>(std::istream& in, heap<TF, ContainerTemplateF>& hp)
 {
     TF temp;
     in >> temp;
@@ -97,8 +97,8 @@ std::istream& operator>>(std::istream& in, heap<TF>& hp)
     return in;
 }
 
-template<class TF>
-std::ostream& operator<<(std::ostream& out, heap<TF> const& hp)
+template<class TF, template<class... TFArgs> class ContainerTemplateF>
+std::ostream& operator<<(std::ostream& out, heap<TF, ContainerTemplateF> const& hp)
 {
     for (auto const& e : hp.m_container)
     {

@@ -7,7 +7,7 @@ using namespace std;
 
 int main()
 {
-    heap<int> h;
+    heap<int, std::deque> h;
     load_from("data.txt", h);
     cout << "heap" << endl;
     cout << h;
