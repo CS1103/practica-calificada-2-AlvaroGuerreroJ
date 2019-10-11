@@ -9,10 +9,17 @@
 
 #include "heap.hpp"
 
+template<class T, template <class...> class ConTem>
+void insert(heap<T, ConTem>& hp, T first)
+{
+    hp.insert(first);
+}
+
 template<class T, template <class...> class ConTem, class... Args>
 void insert(heap<T, ConTem>& hp, T first, Args... items)
 {
     hp.insert(first);
+    hp.insert(items...);
 }
 
 template<class T, template<class...> class ConTem>
@@ -24,6 +31,8 @@ void load_from(std::string const& file_name, heap<T, ConTem>& hp)
     {
         throw std::runtime_error("The file " + file_name + " doesn't exist");
     }
+
+    hp.clear();
 
     T temp;
     while (in >> temp)

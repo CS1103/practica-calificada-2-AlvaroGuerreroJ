@@ -29,6 +29,8 @@ public:
     template<class... TS>
     void insert(T item, TS... rest);
 
+    void clear();
+
     template<class TF, template<class...> class ContainerTemplateF>
     friend std::istream& operator>>(std::istream& in, heap<TF, ContainerTemplateF>& hp);
     template<class TF, template<class...> class ContainerTemplateF>
@@ -68,6 +70,12 @@ void heap<T, ContainerTemplate>::insert(T item, TS... rest)
 {
     insert(item);
     insert(rest...);
+}
+
+template<class T, template <class...> class ContainerTemplate>
+void heap<T, ContainerTemplate>::clear()
+{
+    m_container.clear();
 }
 
 template<class T, template<class...> class ContainerTemplate>
